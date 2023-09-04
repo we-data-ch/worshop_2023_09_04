@@ -479,7 +479,7 @@ Vestin Hategekimana
 <h2>Classical vs enhanced workflow</h2>
 <h3 id="q-what-is-a-workflow-a-organizing-your-work">Q: What is a workflow? A: Organizing your work</h3>
 <ul>
-<li>From the Research idea to the final output</li>
+<li>From the <strong>Research idea</strong> to the <strong>final output</strong></li>
 <li>Final output:
 <ul>
 <li>Report/Article (PDF, Word)</li>
@@ -544,6 +544,17 @@ Vestin Hategekimana
 <li>Inferential analysis (modelling)</li>
 <li><span style="color: red;">Presentation of results</span></li>
 </ol>
+</section>
+<section id="our-goals-today" class="slide level2">
+<h2>Our goals today</h2>
+<ol type="1">
+<li>Learn a good workflow</li>
+<li>Learn good practices</li>
+<li>Learn new shortcuts</li>
+<li>Learn new coding tips</li>
+<li>Gather a lot of resources</li>
+</ol>
+<p><strong>Automate it once, and let the code do it for you!</strong></p>
 </section></section>
 <section>
 <section id="your-r-environment" class="title-slide slide level1 center">
@@ -587,7 +598,7 @@ Vestin Hategekimana
 <div class="callout-content">
 <p>Rstudio always start at the same place (contrary to other editors). To find the exact location go to:</p>
 <p><code>Tools &gt; Global Options &gt; General</code> (in the tab “Basic”)</p>
-<p>This is the used location when RStudio doesn’t work with a project. See next picture for a visual representation.</p>
+<p>This is the used location when RStudio does not work with a project. See next picture for a visual representation.</p>
 </div>
 </div>
 </div>
@@ -624,7 +635,7 @@ Vestin Hategekimana
 <li>Displace all of your R code to R folder
 <ul>
 <li>Group all the files that work together under a same project folder inside the <code>Project</code> folder.</li>
-<li>For all the R file you don’t know what to do with put them in the <code>Test</code> folder, it will be useful later!</li>
+<li>For all the R file you do not know what to do with put them in the <code>Test</code> folder, it will be useful later!</li>
 </ul></li>
 </ol>
 </section>
@@ -657,15 +668,12 @@ Vestin Hategekimana
 </div>
 </div>
 </div>
+<p><strong>A code you write once is a thing you do not need to redo or remember!</strong></p>
 </section>
 <section class="slide level2">
 
 
 <img data-src="pictures/rtudio_search.png" class="r-stretch quarto-figure-center"><p class="caption">All the time I used the keyword “ggplot” in my code</p></section>
-<section class="slide level2">
-
-<p><strong>Exercices: Try it! (3 min)</strong></p>
-</section>
 <section id="setup-rstudio-to-match-your-image" class="slide level2">
 <h2>Setup RStudio to match your image</h2>
 <p><strong>You will spend a good amout of time in RStudio, makes it all the more enjoyable!</strong></p>
@@ -676,10 +684,6 @@ Vestin Hategekimana
 <li><p><a href="https://docs.posit.co/ide/user/ide/guide/ui/appearance.html">Themes</a></p></li>
 <li><p><a href="https://docs.posit.co/ide/user/ide/guide/ui/command-palette.html">Commande palette</a></p></li>
 </ul>
-</section>
-<section id="the-options" class="slide level2">
-<h2>The options</h2>
-<p><strong>Follow the guide!!</strong></p>
 </section>
 <section id="workspace" class="slide level2">
 <h2>Workspace</h2>
@@ -751,11 +755,21 @@ Vestin Hategekimana
 <p><strong>renv</strong></p>
 </div>
 <div class="callout-content">
-<p>{renv} is a pacakge in are that allow to control the version of your package. What it does is to isolate yourt project from your whole R ecosystem and start as if you didn’t load any packages.</p>
+<p>{renv} is a pacakge in are that allow to control the version of your package. What it does is to isolate yourt project from your whole R ecosystem and start as if you did not load any packages.</p>
 </div>
 </div>
 </div>
 <p><a href="https://docs.posit.co/ide/user/ide/guide/code/projects.html">RStudio project full tutorial</a></p>
+</section>
+<section id="why-you-should-stop-using-setwd" class="slide level2">
+<h2>Why you should stop using <code>setwd()</code>?</h2>
+<ul>
+<li><p>You need to find the path manually every time</p></li>
+<li><p>You need to put it on every document or always start with the same document</p></li>
+<li><p>Projects are only separeted by files (not the entire environment)</p></li>
+<li><p>If you share your code, your colleague need to change the setwd path every time</p></li>
+</ul>
+<p><strong>RStudio project define the working directory once easily and it is shareable!</strong></p>
 </section>
 <section id="setup-the-project-2" class="slide level2">
 <h2>Setup the project (2)</h2>
@@ -781,7 +795,7 @@ Vestin Hategekimana
 </section>
 <section class="slide level2">
 
-<h3 id="exercises-5-min">Exercises (5 min)</h3>
+<h3 id="exercises">Exercises</h3>
 <ol type="1">
 <li>Create new projects and switch back and forth between them</li>
 <li>Create a new project, this time activate the <code>renv</code>. In this project try to use a library (for instance {dplyr})</li>
@@ -809,14 +823,14 @@ Vestin Hategekimana
 
 <h3 id="why-renv">Why {renv}?</h3>
 <blockquote>
-<p>Sometime <span style="color: blue;"><strong>when package is updated</strong></span>, major changes are applied. Which mean that <span style="color: blue;"><strong>a code that worked fine until now could produce error or breaks</strong></span>. Since we can’t predict how packages will evolve, we can create an <span style="color: blue;"><strong>environment that is frozen in time</strong></span>. {renv} create this <span style="color: blue;"><strong>isolated context</strong></span> from other package so that package inside it have their own version. Which also mean that we have to <span style="color: blue;"><strong>reinstall all the packages</strong></span>.</p>
+<p>Sometime <span style="color: blue;"><strong>when package is updated</strong></span>, major changes are applied. Which mean that <span style="color: blue;"><strong>a code that worked fine until now could produce error or breaks</strong></span>. Since we cannot predict how packages will evolve, we can create an <span style="color: blue;"><strong>environment that is frozen in time</strong></span>. {renv} create this <span style="color: blue;"><strong>isolated context</strong></span> from other package so that package inside it have their own version. Which also mean that we have to <span style="color: blue;"><strong>reinstall all the packages</strong></span>.</p>
 </blockquote>
 </section>
 <section class="slide level2">
 
 <h3 id="use-renv">Use {renv}</h3>
 <p><a href="https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html">Renv tutorial</a></p>
-<p>If the project wasn’t started with renv the first time</p>
+<p>If the project was not started with renv the first time</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Update from time to time to keep track of the packages</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -841,7 +855,7 @@ Vestin Hategekimana
 </section>
 <section class="slide level2">
 
-<h3 id="exercices-2-min">Exercices (2 min)</h3>
+<h3 id="exercices">Exercices</h3>
 <ol type="1">
 <li>Populate your working directory with the folders needed</li>
 <li>Add the following dataset to the right folder:
@@ -853,9 +867,13 @@ Vestin Hategekimana
 </section>
 <section id="first-script" class="slide level2">
 <h2>First script</h2>
-<p><a href="https://docs.posit.co/ide/user/ide/guide/code/execution.html">Run code on RStudio</a> and <a href="https://docs.posit.co/ide/user/ide/guide/productivity/text-editor.html#multiple-cursors">Tutorial RStudio Text Editor</a></p>
+<p><a href="https://docs.posit.co/ide/user/ide/guide/code/execution.html">Run code on RStudio</a>, <a href="https://docs.posit.co/ide/user/ide/guide/productivity/text-editor.html">Tutorial RStudio Text Editor</a>, <a href="https://docs.posit.co/ide/user/ide/guide/code/console.html">R console</a> and <a href="https://docs.posit.co/ide/user/ide/reference/shortcuts.html">Shortcuts</a></p>
 
 <img data-src="pictures/re_run_source.png" class="r-stretch quarto-figure-center"><p class="caption">Let’s get started!</p></section>
+<section id="split-your-screen-for-interactive-parts" class="slide level2">
+<h2>Split your screen for interactive parts</h2>
+
+<img data-src="pictures/split_screen.jpg" class="r-stretch quarto-figure-center"><p class="caption">The shared screen on the left and your screen on the right (as you want)</p></section>
 <section class="slide level2">
 
 <div class="callout callout-important callout-titled callout-style-default">
@@ -887,10 +905,10 @@ Vestin Hategekimana
 </section>
 <section class="slide level2">
 
-<h3 id="exercices-1-min">Exercices (1 min)</h3>
+<h3 id="exercices-1">Exercices</h3>
 <p>Create the file “<code>1_cleaning.R</code>” in your “<code>Script</code>” folder equivalent and open it.</p>
 <blockquote>
-<p>You could also name it “<code>01_the_data_cleaning_file.R</code>”. The name you choose doesn’t matter as long as it is <strong>ordered</strong> and <strong>self-explanatory</strong>.</p>
+<p>You could also name it “<code>01_the_data_cleaning_file.R</code>”. The name you choose does not matter as long as it is <strong>ordered</strong> and <strong>self-explanatory</strong>.</p>
 </blockquote>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -901,7 +919,7 @@ Vestin Hategekimana
 <p><strong><a href="https://style.tidyverse.org/index.html">Tidyverse style guide</a>: Files</strong></p>
 </div>
 <div class="callout-content">
-<p>Note that we don’t use <strong>spaces</strong> or <strong>special characters</strong> to follow the <a href="https://style.tidyverse.org/files.html">tidyverse style guide for files</a>.</p>
+<p>Note that we do not use <strong>spaces</strong> or <strong>special characters</strong> to follow the <a href="https://style.tidyverse.org/files.html">tidyverse style guide for files</a>.</p>
 </div>
 </div>
 </div>
@@ -1025,7 +1043,7 @@ Vestin Hategekimana
 <div class="callout-content">
 <ul>
 <li><p>It loads the package with <code>library()</code></p></li>
-<li><p>If it doesn’t find it, it installs it with <code>install.packages()</code></p></li>
+<li><p>If it does not find it, it installs it with <code>install.packages()</code></p></li>
 <li><p>It updates packages only if specified</p></li>
 </ul>
 </div>
@@ -1297,7 +1315,7 @@ Vestin Hategekimana
 </section>
 <section class="slide level2">
 
-<h3 id="exercises">Exercises</h3>
+<h3 id="exercises-1">Exercises</h3>
 <ol type="1">
 <li>Run the whole file <code>1_cleaning.R</code> with the command <code>ctrl/cmd + alt + r</code> to be sure that everything works fine.</li>
 <li>Create the files <code>2_tables.R</code>, <code>3_figures.R</code> and <code>4_models.R</code> and put them in the right folder.</li>
@@ -1338,7 +1356,7 @@ Vestin Hategekimana
 </div>
 </div>
 </div>
-<p><span style="color: red;"><strong>Alway start by loading the packages and data</strong></span><strong>. So that, next time we start the project, we don’t need to open the previous script to load the packages and the data since every scripts is self-contained.</strong></p>
+<p><span style="color: red;"><strong>Alway start by loading the packages and data</strong></span><strong>. So that, next time we start the project, we do not need to open the previous script to load the packages and the data since every scripts is self-contained.</strong></p>
 </section>
 <section class="slide level2">
 
@@ -1446,7 +1464,7 @@ Vestin Hategekimana
 <span id="cb22-11"><a href="#cb22-11"></a><span class="co"># Visualization ----</span></span>
 <span id="cb22-12"><a href="#cb22-12"></a><span class="co"># 1. Emancipative distribution</span></span>
 <span id="cb22-13"><a href="#cb22-13"></a>  <span class="co"># Simple dansity plot for the emancipative part</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a>emancipative_distribution<span class="ot">&lt;-</span> </span>
+<span id="cb22-14"><a href="#cb22-14"></a>emancipative_distribution <span class="ot">&lt;-</span> </span>
 <span id="cb22-15"><a href="#cb22-15"></a>  andorra_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(emancipative)) <span class="sc">+</span></span>
 <span id="cb22-17"><a href="#cb22-17"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
@@ -1521,6 +1539,10 @@ Vestin Hategekimana
 </div>
 </div>
 </section>
+<section id="compile-reports-parentheses-to-force-output" class="slide level2">
+<h2>Compile reports (parentheses to force output)</h2>
+
+<img data-src="pictures/parentheses_report.png" class="r-stretch"></section>
 <section id="background-jobs" class="slide level2">
 <h2>Background Jobs</h2>
 
@@ -1578,7 +1600,7 @@ Vestin Hategekimana
 <p>There are other tools to make your work better/efficient</p>
 <ul>
 <li><p><a href="https://github.com/dokato/todor">{todor}</a>: TODO, FIXME, etc. to keep track of your work</p></li>
-<li><p>Don’t repeat yourself with <a href="https://nhsrcommunity.com/dont-repeat-yourself-functions/">function</a> and <a href="https://github.com/wahani/modules">{modules}</a></p></li>
+<li><p>Do not repeat yourself with <a href="https://nhsrcommunity.com/dont-repeat-yourself-functions/">function</a> and <a href="https://github.com/wahani/modules">{modules}</a></p></li>
 <li><p>Help me help you with <a href="https://reprex.tidyverse.org/">{reprex}</a></p></li>
 <li><p>Functional (<a href="https://purrr.tidyverse.org/">{purrr}</a>) and Meta (<a href="https://rlang.r-lib.org/">{rlang}</a>) programming</p></li>
 <li><p>SPEED (data): <a href="https://sebkrantz.github.io/collapse/">{collapse}</a>, <a href="https://rdatatable.gitlab.io/data.table/">{data.table}</a>, <a href="https://dtplyr.tidyverse.org/">{dtplyr}</a>, <a href="https://dbplyr.tidyverse.org/">{dbplyr}</a>, <a href="https://arrow.apache.org/docs/r/">{arrow}</a>, <a href="https://github.com/pola-rs/r-polars">{polar}</a>, <a href="https://github.com/markfairbanks/tidypolars">{tidypolar}</a></p></li>
@@ -1608,9 +1630,11 @@ Vestin Hategekimana
 <h2>What is Quarto?</h2>
 <p>One of the best tool for scientific publishing! Keep your code, result and writting together!</p>
 <ul>
-<li><p><a href="https://quarto.org/">Quarto!</a></p></li>
-<li><p><a href="https://quarto.org/docs/guide/">Getting Started</a></p></li>
-<li><p><a href="https://github.com/mcanouil/awesome-quarto">Awesome Quarto</a></p></li>
+<li><p><a href="https://quarto.org/">Quarto official website</a></p></li>
+<li><p><a href="https://quarto.org/docs/gallery/">Quarto gallery</a></p></li>
+<li><p><a href="https://quarto.org/docs/guide/">A good documentation</a></p></li>
+<li><p><a href="https://github.com/mcanouil/awesome-quarto">Awesome Quarto: list of resources on it!</a></p></li>
+<li><p><a href="https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html">Getting started!</a></p></li>
 </ul>
 </section>
 <section id="why-you-should-use-quarto" class="slide level2">
@@ -1631,7 +1655,7 @@ Vestin Hategekimana
 <li><p>Code completion in YAML and markdown</p></li>
 <li><p>Easier to learn (everything builtin and feature cross format)</p></li>
 <li><p>Rmarkdown are easily convertible (also your knowledge)</p></li>
-<li><p><strong>Quarto will continue to grow, Rmarkdown won’t</strong></p></li>
+<li><p><strong>Quarto will continue to grow, Rmarkdown won’t!</strong></p></li>
 </ul>
 <p><span style="color: green;">As a RMarkdown user, it is easy to start Quarto (they are mostly the same!)</span></p>
 </section>
@@ -1652,7 +1676,7 @@ Vestin Hategekimana
 </div>
 </div>
 </div>
-<p><strong>Follow the guide!</strong></p>
+<p><a href="https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html">Getting started</a> and <a href="https://docs.posit.co/ide/user/ide/guide/documents/visual-editor.html">visual mode</a></p>
 </section></section>
 <section id="questions-freestyle" class="title-slide slide level1 center">
 <h1>(5) Questions &amp; freestyle</h1>
@@ -1664,8 +1688,8 @@ Vestin Hategekimana
 </ul>
 <p><strong>I can:</strong></p>
 <ul>
-<li><p>Show you the magic wand</p></li>
-<li><p>Go in depth we some ressources</p></li>
+<li><p>Show you optimization with functions (Do not repeat yourself)</p></li>
+<li><p>Go in depth we some ressources or subjects</p></li>
 </ul>
 
 <img src="pictures/wedata_logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
