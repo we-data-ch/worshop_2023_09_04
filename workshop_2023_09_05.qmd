@@ -1,0 +1,1229 @@
+---
+title: "Workshop: R Workflow"
+author: "Vestin Hategekimana"
+format:
+  revealjs:
+    theme: default
+    logo: pictures/wedata_logo.png
+    transition: slide
+    background-transition: fade
+    preview-links: true
+    toc: true
+    toc-depth: 1
+    highlight-style: dracula
+editor: visual
+---
+
+# Before we start
+
+::: incremental
+-   Based on the future workshop for Take Over (UNIGE)
+-   Feel free to interrupt me or ask question (or leave)
+-   We will go on the group pace
+    -   Slides are also tutorial for autonomous learning
+-   slides are available online
+:::
+
+# (1) Introduction
+
+## Why a workshop on workflow?
+
+### Because it is...
+
+-   [Not taught in statistical class]{style="color: blue;"}
+
+    -   Focus on statistical method
+    -   The tool is secondary
+
+-   [Hard to find good examples]{style="color: blue;"}
+
+    -   Online and offline sources focus on the script
+    -   Mostly for development
+
+-   [A matter of Statistical tool vs Programming language]{style="color: blue;"}
+
+------------------------------------------------------------------------
+
+### Problem of not learning workflow:
+
+1.  [Spaghetti code]{style="color: blue;"}
+    -   Unreadable, slow, unstable, not reusable
+2.  [Non-reproducible work]{style="color: blue;"}
+    -   Works only on your computer under specific circumstances
+3.  [Hard collaboration]{style="color: blue;"}
+    -   "You want to share that?"
+4.  [Painful learning]{style="color: blue;"}
+    -   You need 5 times the energy required to do things and learn
+
+## Classical vs enhanced workflow
+
+### Q: What is a workflow? A: Organizing your work
+
+-   From the **Research idea** to the **final output**
+-   Final output:
+    -   Report/Article (PDF, Word)
+    -   Presentation (reveal.js, beamer, PowerPoint)
+    -   Website (HTML)
+    -   Book (HTML, PDF, Word, EPUB, AsciiDoc)
+
+------------------------------------------------------------------------
+
+### Classical workflow as presented by Posit (previously RStudio)
+
+![R for Data Science (Whickham & Garrett, 2017)](pictures/data_science.png)
+
+[The online version of the book](https://r4ds.had.co.nz/index.html)
+
+------------------------------------------------------------------------
+
+##  {auto-animate="true"}
+
+#### What is in the program in statistical classes:
+
+::: incremental
+1.  Research plan
+2.  Data preparation
+3.  Cleaning
+4.  (Exploratory analysis)
+5.  Descriptive analysis
+6.  Inferential analysis (modelling)
+7.  Presentation of results
+:::
+
+##  {auto-animate="true"}
+
+#### What we really [focus]{style="color: red;"} on in class:
+
+1.  [Research plan]{style="color: red;"}
+2.  Data preparation
+3.  Cleaning
+4.  (Exploratory analysis)
+5.  Descriptive analysis
+6.  [Inferential analysis (modelling)]{style="color: red;"}
+7.  Presentation of results
+
+##  {auto-animate="true"}
+
+#### What we are going to do today:
+
+1.  **Project set-up**
+2.  Cleaning
+3.  Descriptive analysis
+4.  Inferential analysis (modelling)
+5.  Presentation of results
+
+##  {auto-animate="true"}
+
+#### What we are going to [focus]{style="color: red;"} on today:
+
+1.  [**Project set-up**]{style="color: red;"}
+2.  Cleaning
+3.  Descriptive analysis
+4.  Inferential analysis (modelling)
+5.  [Presentation of results]{style="color: red;"}
+
+## Our goals today
+
+1.  Learn a good workflow
+2.  Learn good practices
+3.  Learn new shortcuts
+4.  Learn new coding tips
+5.  Gather a lot of resources
+
+**Automate it once, and let the code do it for you!**
+
+# (2) Your R environment
+
+## Where does R works?
+
+::: callout-important
+When you start a R session, R locate itself somewhere in your computer. The exact location is called **Working directory (wd)**.
+:::
+
+### Where exactly?
+
+-   **Working directory (wd)**: Where R works in the moment.
+-   To see where R work you can use the following code:
+
+``` r
+# Get the working directory
+getwd()
+```
+
+------------------------------------------------------------------------
+
+### Default Working directory in RStudio
+
+::: callout-important
+Rstudio always start at the same place (contrary to other editors). To find the exact location go to:
+
+`Tools > Global Options > General` (in the tab "Basic")
+
+This is the used location when RStudio does not work with a project. See next picture for a visual representation.
+:::
+
+------------------------------------------------------------------------
+
+![The location is under "Default working directory (when not in a project)"](pictures/global_options_general.png)
+
+------------------------------------------------------------------------
+
+::: callout-note
+## Take notes!
+
+It is good practice to place all (or most) of your R code in a same folder.
+
+> In my case, I have a `Code` folder that contain every programming language I use (There is one for R). Inside each folder, there are at least Two folders: `Test(s)`, where I test new things and `Project` where I put all my serious projects in their dedicated folder. [This is in the `Test(s)` folder that we will]{style="color: red;"} [set our default working directory]{style="color: red;"}.
+:::
+
+------------------------------------------------------------------------
+
+**Exercices**
+
+1.  Create a folder dedicated to R and create the `Test` and `Project` folders inside it.
+2.  Based on the three previous slides change the de default working directory to the `Test` directory.
+3.  Displace all of your R code to R folder
+    -   Group all the files that work together under a same project folder inside the `Project` folder.
+    -   For all the R file you do not know what to do with put them in the `Test` folder, it will be useful later!
+
+------------------------------------------------------------------------
+
+### Advantages
+
+1.  You always know where your files are: [it must be in the R folder!!!]{style="color: red;"}
+2.  You have now a distinction between your playground (`Test` folder) and your serious works `Project`
+3.  You've just created your [best learning resource for R]{style="color: green;"}
+    -   Powerful with `ctrl/cmd + shift + f` in RStudio
+
+------------------------------------------------------------------------
+
+::: callout-tip
+## ctrl/cmd + shift + f
+
+This command allow you to search all the R code in a specific folder. Since all our R code is in the same place, we can search the "archive" of our previous work. It come really handy when we need to remember how to use a particular code. You can either search anything (function, comment, etc.).
+
+When you search for a particular keyword, it will show you all the time you used it and will indicate you in wich folder and which line. You can also click on the result and RStudio will open the select file in the right line (really powerful).
+
+**See an example in the next slide**
+:::
+
+**A code you write once is a thing you do not need to redo or remember!**
+
+------------------------------------------------------------------------
+
+![All the time I used the keyword "ggplot" in my code](pictures/rtudio_search.png)
+
+## Setup RStudio to match your image
+
+**You will spend a good amout of time in RStudio, makes it all the more enjoyable!**
+
+**Ressources:**
+
+-   [RStudio user Guide](https://docs.posit.co/ide/user/ide/get-started/)
+
+-   [Pane Layout](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
+
+-   [Themes](https://docs.posit.co/ide/user/ide/guide/ui/appearance.html)
+
+-   [Commande palette](https://docs.posit.co/ide/user/ide/guide/ui/command-palette.html)
+
+## Workspace
+
+![Remove the autoloading](pictures/workspace)
+
+------------------------------------------------------------------------
+
+### Why?
+
+[**Reproducibility!!!**]{style="color: red;"}
+
+-   Force you to rerun your code in the right order
+
+> Long-term [**reproducibility**]{style="color: red;"} is enhanced when you turn this feature off and clear R's memory at every restart. Starting with a blank slate provides timely feedback that encourages the development of scripts that are [**complete and self-contained**]{style="color: blue;"}. *Posit*
+
+## Display
+
+![Code Display](pictures/code_display.png)
+
+------------------------------------------------------------------------
+
+### Why?
+
+**It make the whole work smoother and colorful**
+
+![At this point it is trully art](pictures/display_art.png)
+
+## Themes
+
+![Rstudio themes](pictures/rstudio_theme.png)
+
+------------------------------------------------------------------------
+
+### Why?
+
+![**Why not? It is pretty and I like that!**](pictures/dracula_theme.png)
+
+## Themes that might interest you
+
+[Rsthemes](https://github.com/gadenbuie/rsthemes)
+
+[Dracula RSthemes (my favorite)](https://draculatheme.com/rstudio)
+
+[GitHub rsthemes](https://github.com/topics/rstheme)
+
+[Other RStudio themes](https://github.com/mkearney/rstudiothemes)
+
+# (3) Your project from A to Z
+
+## Setup the project (1)
+
+::: callout-note
+## RStudio project
+
+RStudio projects (.Rproj) are file that tell R where to works. They also allow to set options and behaviour that R specific to the project.
+:::
+
+::: callout-note
+## renv
+
+{renv} is a pacakge in are that allow to control the version of your package. What it does is to isolate yourt project from your whole R ecosystem and start as if you did not load any packages.
+:::
+
+[RStudio project full tutorial](https://docs.posit.co/ide/user/ide/guide/code/projects.html)
+
+## Why you should stop using `setwd()`?
+
+-   You need to find the path manually every time
+
+-   You need to put it on every document or always start with the same document
+
+-   Projects are only separeted by files (not the entire environment)
+
+-   If you share your code, your colleague need to change the setwd path every time
+
+**RStudio project define the working directory once easily and it is shareable!**
+
+## Setup the project (2)
+
+::: columns
+::: {.column width="70%"}
+![(2) New project](pictures/projects_new.png)
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="20%"}
+![(1) Open project](pictures/project_open.png)
+:::
+:::
+
+------------------------------------------------------------------------
+
+### Exercises
+
+1.  Create new projects and switch back and forth between them
+2.  Create a new project, this time activate the `renv`. In this project try to use a library (for instance {dplyr})
+
+------------------------------------------------------------------------
+
+### Why projects? (1)
+
+> Expert data scientists [**keep all the files associated with a given project together**]{style="color: blue;"} --- input data, scripts, analytical results, and figures. This is such a [**wise and common practice**]{style="color: blue;"} that RStudio has built-in support for this via Projects. RStudio Projects make it straightforward to divide your work into [**multiple contexts, each with their own working directory, workspace, history, and source documents**]{style="color: blue;"}. *Posit*
+
+------------------------------------------------------------------------
+
+### Why projects? (2)
+
+1.  Each project has its own environment
+2.  Each project has its own options
+3.  The working directory is fixed (ban `setwd()` from your code!)
+4.  The work can be shared easily
+5.  The project can be stored easily on GitHub
+
+------------------------------------------------------------------------
+
+### Why {renv}?
+
+> Sometime [**when package is updated**]{style="color: blue;"}, major changes are applied. Which mean that [**a code that worked fine until now could produce error or breaks**]{style="color: blue;"}. Since we cannot predict how packages will evolve, we can create an [**environment that is frozen in time**]{style="color: blue;"}. {renv} create this [**isolated context**]{style="color: blue;"} from other package so that package inside it have their own version. Which also mean that we have to [**reinstall all the packages**]{style="color: blue;"}.
+
+------------------------------------------------------------------------
+
+### Use {renv}
+
+[Renv tutorial](https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html)
+
+If the project was not started with renv the first time
+
+``` r
+renv::init()
+```
+
+Update from time to time to keep track of the packages
+
+``` r
+renv::snapshot()
+```
+
+Download a specific package version of a package
+
+``` r
+require(devtools)
+install_version("ggplot2", version = "0.9.1", repos = "http://cran.us.r-project.org")
+```
+
+------------------------------------------------------------------------
+
+### Setup working directory
+
+![One way to do that](pictures/folder_organization.png)
+
+------------------------------------------------------------------------
+
+## Organisation
+
+-   `Data`: Raw data
+-   `MyData`: Cleaned data
+-   `Report`: Report/presentation created with a notebook
+-   `Result`: Folder for tables and figures
+-   `Scripts`: Where the code is
+
+------------------------------------------------------------------------
+
+### Exercices
+
+1.  Populate your working directory with the folders needed
+2.  Add the following dataset to the right folder:
+    -   [Word Value Survey](https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp) (Please take Andorra 2018)
+    -   Download the **stata** file
+
+------------------------------------------------------------------------
+
+## First script
+
+[Run code on RStudio](https://docs.posit.co/ide/user/ide/guide/code/execution.html), [Tutorial RStudio Text Editor](https://docs.posit.co/ide/user/ide/guide/productivity/text-editor.html), [R console](https://docs.posit.co/ide/user/ide/guide/code/console.html) and [Shortcuts](https://docs.posit.co/ide/user/ide/reference/shortcuts.html)
+
+![Let's get started!](pictures/re_run_source.png)
+
+## Split your screen for interactive parts
+
+![The shared screen on the left and your screen on the right (as you want)](pictures/split_screen.jpg)
+
+------------------------------------------------------------------------
+
+::: callout-important
+## Objectif for a clean code
+
+[**(1) Files can be run entirely in one go**]{style="color: red;"} `(ctrl/cmd + alt + r)`
+
+-   Code in the **right order** (no error)
+-   No command that are **useless for the computer** or **change the state of the computer** (ex. `setwd()`, `install.packages()`, `View()`)
+
+[**(2) Files should be self-contained**]{style="color: red;"}
+
+-   All the needed **packages**, **functions** and **data** should be loaded in **the specific file**
+-   The code is **self-explanatory**, **well commented** and **structured**
+
+[**(3) Files should be named, organized and used with a specific purpose**]{style="color: red;"}
+
+-   **Order** and **purpose** in the file's name (ex. "1. Cleaning.R")
+:::
+
+------------------------------------------------------------------------
+
+### Exercices
+
+Create the file "`1_cleaning.R`" in your "`Script`" folder equivalent and open it.
+
+> You could also name it "`01_the_data_cleaning_file.R`". The name you choose does not matter as long as it is **ordered** and **self-explanatory**.
+
+::: callout-important
+## [Tidyverse style guide](https://style.tidyverse.org/index.html): Files
+
+Note that we do not use **spaces** or **special characters** to follow the [tidyverse style guide for files](https://style.tidyverse.org/files.html).
+:::
+
+------------------------------------------------------------------------
+
+### Variable names
+
+-   Should follow a convention: `snake_case` , `CamelCase` , etc.
+
+-   No spaces and no special character
+
+-   Clear but not too long
+
+### Spacing
+
+-   Between expression (readability)
+
+-   Make line breaks as frequent as possible
+
+------------------------------------------------------------------------
+
+### Comments
+
+![Comment example](pictures/good_comment.PNG)
+
+Good comments only explain the [overall goal]{style="color: red;"}, not each specific line or step.
+
+------------------------------------------------------------------------
+
+### Sections
+
+![](pictures/rescale_function_collapse.png)
+
+[Code section](https://docs.posit.co/ide/user/ide/guide/code/code-sections.html)
+
+``` r
+# Section One ---------------------------------
+# Section One ----
+
+# Section Two =================================
+# Section Two ====
+
+### Section Three ############################# 
+### Section Three ####
+```
+
+------------------------------------------------------------------------
+
+### How I organize
+
+![](pictures/my_section.png)
+
+Sometimes I replace "Analysis" by "Work"
+
+------------------------------------------------------------------------
+
+### The sections in application
+
+![](pictures/code_example.png)
+
+------------------------------------------------------------------------
+
+### Sections are useful because you can:
+
+1.  Navigate through your code
+2.  Fold your code (also possible for functions and statements)
+3.  Structure your code (different levels)
+
+``` r
+# Chapter ----
+
+## Sub-chapter ----
+
+### Sub-Sub-Chapter ----
+```
+
+##  {auto-animate="true"}
+
+### First code
+
+**Step 1 - set the libraries needed**
+
+``` r
+# Libraries ----
+```
+
+::: callout-important
+## Packages should only be loaded once at the begining of the code
+:::
+
+##  {auto-animate="true"}
+
+### Step 1 - set the libraries needed
+
+**Option (1)**
+
+``` r
+# Libraries ----
+library(tidyverse)
+library(rio) # Should be installed before
+library(janitor) # Should be installed before
+```
+
+::: callout-tip
+## Multiple cursors
+
+`Ctrl + Alt/Option + {Up/Down}`
+
+`Ctrl + Alt/Option + Shift + {Direction}`
+
+`Ctrl + Alt/Option + Shift + {Mouse}`
+:::
+
+##  {auto-animate="true"}
+
+### Step 1 - set the libraries needed
+
+**Option (2)**
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+```
+
+::: callout-tip
+## [{pacman}](https://github.com/trinker/pacman)
+
+-   It loads the package with `library()`
+
+-   If it does not find it, it installs it with `install.packages()`
+
+-   It updates packages only if specified
+:::
+
+[*Select the option that you like the most!*]{style="color: green;"}
+
+------------------------------------------------------------------------
+
+### Importing data: the format/package issue
+
+**To much packages/functions**
+
+Bellow a few examples
+
+``` r
+# R
+load("data.rda")
+data <- readRDS("data.rds")
+
+# csv
+data <- read.csv("data.csv")
+data <- readr::read_csv("data.csv")
+
+# Excel
+data <- xlsx::read.xlsx("data.xlsx")
+data <- readxl::read_excel("data.xlsx")
+
+# SPSS/Stata/SAS
+data <- haven::read_spss("data.sav")
+data <- haven::read_stata("data.dta")
+# etc.
+
+# Arrow
+data <- arrow::open_dataset("data.parquet")
+# etc.
+```
+
+------------------------------------------------------------------------
+
+### A wonderful package
+
+::: callout-tip
+## [{rio}](https://github.com/chainsawriot/rio)
+
+With {rio} you only need two functions:
+
+`import()` and `export()`
+
+**It works for all of the common data format**: *rdata, rda, rds, csv, tsv, sas7bdat, sav, dta, xlsx, parquet, feather, json and many more!*
+:::
+
+It reduce the number of packages/functions to memorize and load.
+
+------------------------------------------------------------------------
+
+##  {auto-animate="true"}
+
+### Step 2 - load the data
+
+``` {.r code-line-numbers="1-2|4|4-7"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  import("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta",
+         setclass = "tbl_df") # {rio}
+```
+
+::: callout-tip
+## [Code completion](https://docs.posit.co/ide/user/ide/guide/productivity/text-editor.html#code-completion)
+
+RStudio propose you sometimes options based on what you already typed. Use the arrow keys or your mouse to choose one of the option and press either `Enter` or `Tab` to accept one.
+
+**For file path:** **If you are in a middle of a pair of double quote, press `Tab` and it will show you all the available folders and files in the working directory. You can navigate using the arrow key or your mouse, go inside folders using `Tab` and select using `Enter`.**
+:::
+
+##  {auto-animate="true"}
+
+### Step 3 - Clean the data
+
+``` {.r code-line-numbers="9-10"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  import("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta",
+         setclass = "tbl_df") # {rio}
+
+andorra_raw %>% 
+  clean_names() # {janitor} standardize column names
+```
+
+::: callout-tip
+## [{janitor}](https://sfirke.github.io/janitor/)
+
+The function [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) from {janitor} clean the dataframe name by:
+
+-   Removing special characters
+-   Lowering cases
+-   Replacing spaces by "`_`" and "`%`" by "`_percent_`" and "`#`" by "`_number_`"
+:::
+
+##  {auto-animate="true"}
+
+### Step 3 - Clean the data
+
+``` {.r code-line-numbers="11-12|13|14|15"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  import("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta",
+         setclass = "tbl_df") # {rio}
+
+andorra_raw %>% 
+  clean_names() %>%  # {janitor} standardize column names
+  select(sex = q260, # Select and rename
+         age = q262, # Select and rename
+         emancipative = resemaval, # Select and rename
+         starts_with("h_"), # Select all variables that starts with "h_"
+         q1:q6) # Select from variable q1 to q6
+```
+
+To go deeper check the following link: [Tidy-Select](https://dplyr.tidyverse.org/reference/select.html)
+
+##  {auto-animate="true"}
+
+### Step 3 - Clean the data
+
+``` {.r code-line-numbers="16|17|18-22|23-25|26-30"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  import("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta",
+         setclass = "tbl_df") # {rio}
+
+andorra_raw %>%
+  clean_names() %>%  # {janitor} standardize column names
+  select(sex = q260, # Select and rename
+         age = q262, # Select and rename
+         emancipative = resemaval, # Select and rename
+         starts_with("h_"), # Select all variables that starts with "h_"
+         q1:q6) %>%  # Select from variable q1 to q6
+  filter_all(all_vars(. >= 0)) %>% # Remove missing values
+  mutate(sex = factor(sex, labels = c("Male", "Female")), # Labels
+         h_settlement = factor(h_settlement, # Labels
+                               labels = c("Capital city",
+                                          "Regional center",
+                                          "Another city",
+                                          "Village")),
+         h_urbrural = factor(h_urbrural, # Labels
+                             labels = c("Urban",
+                                        "Rural"))) %>%
+  mutate_at(6:11, ~factor(.x,
+                           labels = c("Very important",
+                                      "Rather important",
+                                      "Not very important",
+                                      "Not at all important")))
+                                        
+```
+
+##  {auto-animate="true"}
+
+### Step 3 - Clean the data
+
+``` {.r code-line-numbers="9-10"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  import("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta",
+         setclass = "tbl_df") # {rio}
+         
+andorra_clean <- # Save the whole process here
+  andorra_raw %>%
+  clean_names() %>%  # {janitor} standardize column names
+  select(sex = q260, # Select and rename
+         age = q262, # Select and rename
+         emancipative = resemaval, # Select and rename
+         starts_with("h_"), # Select all variables that starts with "h_"
+         q1:q6) %>%  # Select from variable q1 to q6
+  filter_all(all_vars(. >= 0)) %>% # Remove missing values
+  mutate(sex = factor(sex, labels = c("Male", "Female")), # Labels
+         h_settlement = factor(h_settlement, # Labels
+                               labels = c("Capital city",
+                                          "Regional center",
+                                          "Another city",
+                                          "Village")),
+         h_urbrural = factor(h_urbrural, # Labels
+                             labels = c("Urban",
+                                        "Rural"))) %>%
+  mutate_at(6:11, ~factor(.x,
+                           labels = c("Very important",
+                                      "Rather important",
+                                      "Not very important",
+                                      "Not at all important")))
+```
+
+##  {auto-animate="true"}
+
+### Save the data
+
+``` {.r code-line-numbers="33-34"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  import("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta",
+         setclass = "tbl_df") # {rio}
+         
+andorra_clean <- # Save the whole process here
+  andorra_raw %>%
+  clean_names() %>%  # {janitor} standardize column names
+  select(sex = q260, # Select and rename
+         age = q262, # Select and rename
+         emancipative = resemaval, # Select and rename
+         starts_with("h_"), # Select all variables that starts with "h_"
+         q1:q6) %>%  # Select from variable q1 to q6
+  filter_all(all_vars(. >= 0)) %>% # Remove missing values
+  mutate(sex = factor(sex, labels = c("Male", "Female")), # Labels
+         h_settlement = factor(h_settlement, # Labels
+                               labels = c("Capital city",
+                                          "Regional center",
+                                          "Another city",
+                                          "Village")),
+         h_urbrural = factor(h_urbrural, # Labels
+                             labels = c("Urban",
+                                        "Rural"))) %>%
+  mutate_at(6:11, ~factor(.x,
+                           labels = c("Very important",
+                                      "Rather important",
+                                      "Not very important",
+                                      "Not at all important")))
+                                        
+# Saving ----
+export(andorra_clean, file = "MyData/andorra_clean.rds") # {rio}
+```
+
+[Rds and Rda files](https://riptutorial.com/r/example/3650/rds-and-rdata--rda--files)
+
+------------------------------------------------------------------------
+
+### Alternative (shorter)
+
+``` {.r code-line-numbers="5-6,17"}
+# Libraries ----
+pacman::p_load(tidyverse, rio, janitor) # Should be installed before
+
+# Data ----
+andorra_raw <-
+  haven::read_dta("Data/WVS_Wave_7_Andorra_Stata_v5.0.dta") # {haven}
+
+andorra_clean <- # Save the whole process here
+  andorra_raw %>%
+  clean_names() %>%  # {janitor} standardize column names
+  select(sex = q260, # Select and rename
+         age = q262, # Select and rename
+         emancipative = resemaval, # Select and rename
+         starts_with("h_"), # Select all variables that starts with "h_"
+         q1:q6) %>%  # Select from variable q1 to q6
+  filter_all(all_vars(. >= 0)) %>%
+  mutate_at(c(1,4:11), haven::as_factor) # Automatic factor
+  
+# Saving ----
+export(andorra_clean, file = "MyData/andorra_clean.rds") # {rio}
+```
+
+::: smaller
+Easier with `haven::as_factor()` but we need to import the data with `haven::read_dta()` because of compatibility problem!
+:::
+
+::: footer
+:::
+
+------------------------------------------------------------------------
+
+### Exercises
+
+1.  Run the whole file `1_cleaning.R` with the command `ctrl/cmd + alt + r` to be sure that everything works fine.
+2.  Create the files `2_tables.R`, `3_figures.R` and `4_models.R` and put them in the right folder.
+3.  For each file, setup the section to respect our clean code goal (run once, self-contained and organized).
+    -   No need to load [{janitor}](https://sfirke.github.io/janitor/)
+    -   We need to load [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) (tables)
+    -   We need to load [{sjPlot}](https://strengejacke.github.io/sjPlot/) (figures/tables/model)
+
+------------------------------------------------------------------------
+
+### Answers
+
+::: panel-tabset
+## 2_tables.R
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio, gtsummary)
+
+# Data ----
+andorra_clean <- import("MyData/andorra_clean.rds")
+```
+
+## 3_figures.R
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio)
+
+# Data ----
+andorra_clean <- import("MyData/andorra_clean.rds")
+```
+
+## 4_models.R
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio, sjPlot)
+
+# Data ----
+andorra_clean <- import("MyData/andorra_clean.rds")
+```
+:::
+
+[**Alway start by loading the packages and data**]{style="color: red;"}**. So that, next time we start the project, we do not need to open the previous script to load the packages and the data since every scripts is self-contained.**
+
+------------------------------------------------------------------------
+
+### Packages for creating tables
+
+-   [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/)
+    -   [{gt}](https://gt.rstudio.com/)
+    -   [{gtextra}](https://jthomasmock.github.io/gtExtras/)
+-   [{arsenal}](https://mayoverse.github.io/arsenal/)
+-   [{sjPlot}](https://strengejacke.github.io/sjPlot/)
+-   [{kableExtra}](http://haozhu233.github.io/kableExtra/)
+    -   [{knitr}](https://yihui.org/knitr/)
+-   [{flextable}](https://davidgohel.github.io/flextable/) **... and many more!**
+
+------------------------------------------------------------------------
+
+### Package for creating graphs
+
+-   [{ggplot2}](https://ggplot2.tidyverse.org/)
+    -   [All the ggplot2 extensions](https://exts.ggplot2.tidyverse.org/gallery/)
+-   [{sjPlot}](https://strengejacke.github.io/sjPlot/)
+-   [{plotly}](https://plotly.com/r/)
+-   [{eachart4r}](https://echarts4r.john-coene.com/)
+-   [{r2d3}](https://rstudio.github.io/r2d3/) **... and many more!**
+
+Many references: [R graph gallery](https://r-graph-gallery.com/) and [D3.js graph gallery](https://d3-graph-gallery.com/)
+
+------------------------------------------------------------------------
+
+### Packages for modelling
+
+-   [{tidymodels}](https://www.tidymodels.org/)
+-   [{easystats}](https://easystats.github.io/easystats/)
+-   [{sjPlot}](https://strengejacke.github.io/sjPlot/) **... and many more! Again!**
+
+------------------------------------------------------------------------
+
+### Copy/paste each code to its file
+
+::: panel-tabset
+## 2_tables.R
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio, gtsummary)
+
+# Data ----
+andorra_clean <-
+  import("MyData/andorra_clean.rds") %>% 
+  mutate_at(c(1,4:11), fct_drop)
+
+# Work ----
+# 1. Summary
+  # A simple summary table for all the variables
+summary_table <- 
+  andorra_clean %>% 
+  tbl_summary()
+
+# Save docx
+summary_table %>% 
+  as_gt() %>% 
+  gt::gtsave(file = "Results/summary_table.docx")
+
+# Save data
+export(summary_table, file = "MyData/summary_table.rds")
+
+# 2. Emancipative: urban vs rural
+  # Test the difference in emancipative and variables related
+  # to the importance of value in life by urbanicity of region 
+  # of residence.
+emancipative_table <- 
+  andorra_clean %>% 
+  select(h_urbrural,
+         emancipative,
+         starts_with("q")) %>% 
+  tbl_summary(by = h_urbrural) %>% 
+  add_p()
+
+# Save docx
+emancipative_table %>% 
+  as_gt() %>% 
+  gt::gtsave(file = "Results/emancipative_table.docx")
+
+# Save data
+export(emancipative_table, file = "MyData/emancipative_table.rds")
+```
+
+## 3_figures.R
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio, gtsummary)
+
+# Options ----
+theme_set(theme_bw())
+theme_update(legend.position = "top")
+
+# Data ----
+andorra_clean <- import("MyData/andorra_clean.rds")
+
+# Visualization ----
+# 1. Emancipative distribution
+  # Simple dansity plot for the emancipative part
+emancipative_distribution <- 
+  andorra_clean %>% 
+  ggplot(aes(emancipative)) +
+  geom_density(fill = "cyan", alpha = 0.5) +
+  labs(title = "Emancipative index distribution")
+
+# Save png
+emancipative_distribution %>% 
+  ggsave(plot = .,
+         filename = "Results/emancipative_distribution.png")
+
+# Save ggplot
+emancipative_distribution %>% 
+  export(file = "MyData/emancipative_distribution.rds")
+
+# 2. Emancipaitve/sex/urbrural
+  # Emancipative destribtuion by sex and urbanicity
+  # region of residence
+emancipative_sex_urban <- 
+  andorra_clean %>% 
+  ggplot(aes(emancipative, fill = h_urbrural)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~sex) +
+  labs(title = "Emancipative index distribution",
+       subtitle = "by sex and urbanicity of region of residence",
+       fill = "Urbanicity")
+
+# Save png
+emancipative_sex_urban %>% 
+  ggsave(plot = .,
+         scale = 1.5,
+         filename = "Results/emancipative_sex_urban.png")
+
+# Save ggplot
+emancipative_sex_urban %>% 
+  export(file = "MyData/emancipative_sex_urban.rds")
+```
+
+## 4_models.R
+
+``` r
+# Libraries ----
+pacman::p_load(tidyverse, rio, sjPlot)
+
+# Data ----
+andorra_clean <-
+  import("MyData/andorra_clean.rds") %>% 
+  mutate_at(c(1,4:11), fct_drop)
+
+# Analysis ----
+
+## Model ----
+  # A linear model testing the relationship between the emancipative
+  # index and predictors (sex, age, urbanicity of region of residence)
+model <- lm(emancipative ~ sex + age + h_urbrural,
+            data = andorra_clean)
+
+# Save data (model)
+export(model, file = "MyData/model.rds")
+
+# Regression table
+  # The model regression table (save automaticaly)
+tab_model(model,
+          collapse.ci = TRUE,
+          p.style = "stars",
+          file = "Results/regression_table.doc")
+
+# Save data (regression table)
+regression_table <- 
+  tab_model(model,
+          collapse.ci = TRUE,
+          p.style = "stars")
+
+export(regression_table, file = "MyData/regression_table.rds")
+```
+:::
+
+## Compile reports (parentheses to force output)
+
+![](pictures/parentheses_report.png)
+
+## Background Jobs
+
+![It is running alone!](pictures/background_job_print.png)
+
+Now that every file is self-contained, we can run them as [background jobs](https://docs.posit.co/ide/user/ide/guide/tools/jobs.html) to save time.
+
+------------------------------------------------------------------------
+
+### Advantages of background jobs
+
+-   We can keep working with the console while it is running
+-   We are saving time when the work is long
+-   We plan multiple jobs
+
+**But we still have a dependency tree problem!**
+
+------------------------------------------------------------------------
+
+### Dependency tree
+
+```{mermaid}
+graph LR;
+  a[1_cleaning.R] --> b[2_tables.R] & c[3_figures.R] & d[4_models.R]
+```
+
+-   If `1_cleaning.R` changes, we need to rerun all the files
+
+The best tool that automaticaly handle which file to run is [{target}](https://books.ropensci.org/targets/), but it is pretty advanced.
+
+## Workflow in nutshell
+
+1.  [Create a project]{style="color: blue;"}
+2.  [Populate it with the right folders and the data]{style="color: blue;"}
+    -   No space and special character (files/folder)
+    -   Put script in order
+3.  [For each file]{style="color: blue;"}
+    -   **Self-contained**: load packages, data
+    -   **Clean code**: Name, space, comments, sections, order, etc.
+    -   **Save output**: data format and/or other (pictures, files, etc.)
+
+## Optimization
+
+There are other tools to make your work better/efficient
+
+-   [{todor}](https://github.com/dokato/todor): TODO, FIXME, etc. to keep track of your work
+
+-   Do not repeat yourself with [function](https://nhsrcommunity.com/dont-repeat-yourself-functions/) and [{modules}](https://github.com/wahani/modules)
+
+-   Help me help you with [{reprex}](https://reprex.tidyverse.org/)
+
+-   Functional ([{purrr}](https://purrr.tidyverse.org/)) and Meta ([{rlang}](https://rlang.r-lib.org/)) programming
+
+-   SPEED (data): [{collapse}](https://sebkrantz.github.io/collapse/), [{data.table}](https://rdatatable.gitlab.io/data.table/), [{dtplyr}](https://dtplyr.tidyverse.org/), [{dbplyr}](https://dbplyr.tidyverse.org/), [{arrow}](https://arrow.apache.org/docs/r/), [{polar}](https://github.com/pola-rs/r-polars), [{tidypolar}](https://github.com/markfairbanks/tidypolars)
+
+-   SPEED (computing): [{future}](https://future.futureverse.org/), [{furrr}](https://furrr.futureverse.org/), [{Rcpp}](https://www.rcpp.org/), [{JuliaCall}](https://github.com/Non-Contradiction/JuliaCall)
+
+-   Automate your project with [.Rprofile](https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf) and [{usethis}](https://usethis.r-lib.org/)
+
+## Resources to deepen your knowledge in R
+
+-   [Getting help with R](https://www.r-project.org/help.html): How do I know how it works?
+
+-   [Bookdown](https://bookdown.org/): free books online
+
+    -   [R for Data science](https://r4ds.had.co.nz/): Startin using R for data analysis
+
+-   [{tidyverse}](https://www.tidyverse.org/): The new coding standard in R
+
+-   [Awesome R](https://github.com/iamericfletcher/awesome-r-learning-resources): List of awesome packages/works/etc. in R
+
+-   [Metacran](https://www.r-pkg.org/): All the available packages
+
+# (4) Show your results with Quarto
+
+## What is Quarto?
+
+One of the best tool for scientific publishing! Keep your code, result and writting together!
+
+-   [Quarto official website](https://quarto.org/)
+
+-   [Quarto gallery](https://quarto.org/docs/gallery/)
+
+-   [A good documentation](https://quarto.org/docs/guide/)
+
+-   [Awesome Quarto: list of resources on it!](https://github.com/mcanouil/awesome-quarto)
+
+-   [Getting started!](https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html)
+
+## Why you should use Quarto?
+
+As a (data) scientist/researcher, you should save time when you need to publish. Quarto allows you to put your code, its output and your writting in a single file that can be exported in many format.
+
+-   Language agnostic (R, Python, Julia and JavaScript)
+
+-   Highly portable (Rstudio, VS Code, Jupyter, Neovim, etc.)
+
+-   Versatile formats (articles, presentation, website, books, etc.)
+
+-   Good defaults and highly customizable (template for journals)
+
+## Quarto vs RMarkdown
+
+-   Better interface in general (visual mode improved)
+
+-   [**Better format handling!**]{style="color: red;"}
+
+-   Code completion in YAML and markdown
+
+-   Easier to learn (everything builtin and feature cross format)
+
+-   Rmarkdown are easily convertible (also your knowledge)
+
+-   **Quarto will continue to grow, Rmarkdown won't!**
+
+[As a RMarkdown user, it is easy to start Quarto (they are mostly the same!)]{style="color: green;"}
+
+## Your first notebook
+
+Now let's add the results of our analysis to a notebook!
+
+```{mermaid}
+graph LR;
+  a[1_cleaning.R] --> b[2_tables.R] & c[3_figures.R] & d[4_models.R]
+  b & c & d --> e[report.qmd]
+  e --> f[articles] & g[presentation] & h[website] & i[book]
+```
+
+[Getting started](https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html) and [visual mode](https://docs.posit.co/ide/user/ide/guide/documents/visual-editor.html)
+
+# (5) Questions & freestyle
+
+**You can:**
+
+-   Discuss/ask questions
+
+-   Try the whole workflow with your own projects
+
+-   Leave
+
+**I can:**
+
+-   Show you optimization with functions (Do not repeat yourself)
+
+-   Go in depth we some ressources or subjects
